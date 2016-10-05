@@ -1,0 +1,46 @@
+body {
+	background-color: gray;
+}
+
+.verseWord {
+	display: inline-block;
+	background-color: white;
+	color: green;
+	font-weight: bold;
+	font-size: 28px;
+	border: 3px solid black;
+	border-radius: 3px;
+	margin: 5px;
+	padding: 5px;
+}
+
+.error {
+	background-color: #ffffff;
+	color: #ff2222;
+}
+
+.home-input {
+	min-width: 8em;
+}
+
+.jumbotron {
+	margin: 10px;
+}
+
+.jumbotron-answer {
+	padding: 20px;
+}
+
+.scrambleWord {
+	margin-right: 1px;
+	margin-left: 1px;
+	margin-bottom: 4px;
+}
+
+#submit {
+	min-width: 4em;
+}
+
+#solution {
+	display: none;
+}

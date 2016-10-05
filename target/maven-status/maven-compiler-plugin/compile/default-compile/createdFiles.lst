@@ -1,0 +1,7 @@
+main\java\com\joshwithee\scrambler\service\VerseParser.class
+main\java\com\joshwithee\scrambler\model\HomeForm.class
+main\java\com\joshwithee\scrambler\model\Exercise.class
+main\java\org\esv\bible\service\ESVService.class
+main\java\com\joshwithee\scrambler\controller\ScramblerController.class
+main\java\com\joshwithee\scrambler\model\Goal.class
+main\java\com\joshwithee\scrambler\controller\GoalController.class
