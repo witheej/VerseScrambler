@@ -16,7 +16,4 @@
 	<bean id="verseParser" name="verseParser" class="main.java.com.joshwithee.scrambler.service.VerseParser"></bean>
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource" p:basename="messages"></bean>
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" p:defaultLocale="en"></bean>
-	<mvc:interceptors>
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="language"></bean>
-	</mvc:interceptors>
 </beans>

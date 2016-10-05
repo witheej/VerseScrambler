@@ -74,8 +74,10 @@
 			</div>
 			<div id="answerSpace" class="well"></div>
 			<div>
-				<button id="submitAnswer" onclick="var ans = '';
-					$('#answerSpace button').each(function(){ans += $(this).text() + ' '}); var sol = $('#solution').text(); if(ans.trim()==sol.trim()){$('#response').text('Correct!')}else{$('#response').text('Wrong.')};" class="btn btn-success">Submit!</button>
+				<button id="submitAnswer"
+					onclick="var ans = '';
+					$('#answerSpace button').each(function(){ans += $(this).text() + ' '}); var sol = $('#solution').text(); if(ans.trim()==sol.trim()){$('#response').text('Correct!')}else{$('#response').text('Wrong.')};"
+					class="btn btn-success">Submit!</button>
 				<button id="clearAll" class="btn btn-danger">Clear All</button>
 				<span id="response"></span>
 			</div>

@@ -25,11 +25,10 @@
 				<%-- 				<spring:message code="goal.text" /> --%>
 				<!-- 				Language : <a href="?language=en">English</a> | <a href="?language=es">Spanish</a> -->
 				<!-- 			</div> -->
-				<form:form commandName="submittedVerse" action="home">
+				<form:form commandName="submittedVerse" action="scrambler">
 					<div class="row">
 						<div class="col-xs-2 home-input">
-							<label for="bookSelection">Book:<form:select id="bookSelection" name="book" path="book"
-									cssErrorClass="form-control alert-danger" class="form-control">
+							<label for="bookSelection">Book:<form:select id="bookSelection" name="book" path="book" class="form-control">
 									<option value="Genesis">Genesis</option>
 									<option value="Exodus">Exodus</option>
 									<option value="Leviticus">Leviticus</option>
@@ -101,26 +100,14 @@
 						</div>
 						<div class="col-xs-2 home-input">
 							<label for="chapterSelection">Chapter:<form:input id="chapterSelection" name="chapter" path="chapter" type="text"
-									cssErrorClass="form-control alert-danger" class="form-control" /></label>
+									class="form-control" /></label>
 						</div>
 						<div class="col-xs-2 home-input">
-							<label for="verseSelection">Verse:<form:input id="verseSelection" name="verse" path="verse" type="text"
-									cssErrorClass="form-control alert-danger" class="form-control" /></label>
+							<label for="verseSelection">Verse:<form:input id="verseSelection" name="verse" path="verse" type="text" class="form-control" /></label>
 						</div>
 						<div class="col-xs-1">
 							<label for="submit">Submit:<input id="submit" name="submit" type="submit" value="Go!" class="form-control btn-primary" /></label>
 						</div>
-					</div>
-					<div class="row">
-<!-- 						<div class="col-xs-12"> -->
-<%-- 							<form:errors path="book" cssClass="error" /> --%>
-<!-- 						</div> -->
-<!-- 						<div class="col-xs-12"> -->
-<%-- 							<form:errors path="chapter" cssClass="error" /> --%>
-<!-- 						</div> -->
-<!-- 						<div class="col-xs-12"> -->
-<%-- 							<form:errors path="verse" cssClass="error" /> --%>
-<!-- 						</div> -->
 					</div>
 				</form:form>
 			</div>

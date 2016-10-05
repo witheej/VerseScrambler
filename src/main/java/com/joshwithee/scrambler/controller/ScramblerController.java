@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 @SessionAttributes("submittedVerse")
 public class ScramblerController {
-	
-	
+
 	@Autowired
 	private ESVService esvService = new ESVService();
 
@@ -35,21 +34,13 @@ public class ScramblerController {
 	}
 
 	@RequestMapping(value = { "/", "home" }, method = RequestMethod.POST)
-	public String returnHome(@Valid @ModelAttribute("submittedVerse") HomeForm submittedVerse, HttpServletRequest request, BindingResult result) {
-
-		if (result.hasErrors()) {
-			System.out.println("Method returnHome says: Validation failed.");
-			return "home";
-		}else{
-			System.out.println("Method returnHome says: No Errors.");
-		}
+	public String returnHome(@ModelAttribute("submittedVerse") HomeForm submittedVerse, HttpServletRequest request) {
 
 		return "redirect:scrambler.html";
 	}
 
 	@RequestMapping(value = "/scrambler")
 	public String getScrambler(@ModelAttribute("submittedVerse") HomeForm submittedVerse, HttpServletRequest request, ESVService esvService) {
-		System.out.println("Mr. Hull has arrived in the scrambler. Scramble him!");
 
 		String book = submittedVerse.getBook();
 		int chapter = submittedVerse.getChapter();

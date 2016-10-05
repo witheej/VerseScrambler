@@ -1,14 +1,9 @@
 package main.java.com.joshwithee.scrambler.model;
 
-import org.hibernate.validator.constraints.Range;
-
-
 public class HomeForm {
 
 	private String book;
-	@Range(min=1, max=150)
 	private int chapter;
-	@Range(min=1, max=176)
 	private int verse;
 
 	public String getBook() {
