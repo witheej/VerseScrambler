@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("submittedVerse")
 public class ScramblerController {
 
 	@Autowired
@@ -25,15 +24,20 @@ public class ScramblerController {
 
 	@Autowired
 	private VerseParser verseParser = new VerseParser();
+	
+	@RequestMapping(value = "/")
+	public String forwardRoot(){
+		return "forward:/home";
+	}
 
-	@RequestMapping(value = { "/", "home" }, method = RequestMethod.GET)
+	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String startHome(Model model, HttpServletRequest request) {
 		HomeForm form = new HomeForm();
 		model.addAttribute("submittedVerse", form);
 		return "home";
 	}
 
-	@RequestMapping(value = { "/", "home" }, method = RequestMethod.POST)
+	@RequestMapping(value = "home", method = RequestMethod.POST)
 	public String returnHome(@ModelAttribute("submittedVerse") HomeForm submittedVerse, HttpServletRequest request) {
 
 		return "redirect:scrambler.html";
@@ -55,7 +59,7 @@ public class ScramblerController {
 
 		if (verseText.matches("^ERROR.*")) {
 			System.out.println("Method getScrambler says: Invalid reference.");
-			return "home";
+			return "redirect:home.html";
 		} else {
 			System.out.println("Method getScrambler says: Valid reference.");
 		}

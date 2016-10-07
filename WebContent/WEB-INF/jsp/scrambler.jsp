@@ -12,8 +12,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/additional-methods.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css">
-<script>
+<script type="text/javascript">
 	(function($, window, document) {
 
 		$(function() {
@@ -41,6 +43,8 @@
 			clear.on("click", function() {
 				$("#answerSpace button").click();
 			});
+
+			
 
 		});
 
