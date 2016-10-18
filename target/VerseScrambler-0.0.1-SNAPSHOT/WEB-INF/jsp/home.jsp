@@ -18,143 +18,219 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css">
 </head>
 <script type="text/javascript">
-	(function($, window, document) {
+$('document').ready(function(){
 
-		$(function() {
+	$('#bookSelection').val('noBookSelected')
+	$('#chapterSelection').val('');
+	$('#verseSelection').val('');
+	$('#chapterSelection').prop('disabled',true);
+	$('#verseSelection').prop('disabled',true);
+	
+	$('#bookSelection').on('change',function(){
+		if($('#bookSelection').val() == 'noBookSelected'){
+			$('#chapterSelection').val('');
+			$('#verseSelection').val('');
+			$('#chapterSelection').prop('disabled',true);
+			$('#verseSelection').prop('disabled',true);
+		}else{
+			$('#chapterSelection').val('1');
+			$('#chapterSelection').prop('disabled',false);
+		}
 
-			$("#referenceForm").validate({
-				rules : {
-					"chapter" : {
-						required : true,
-						min : 1,
-						max : function(element) {
+	});
 
-							switch ($('#bookSelection').val()) {
-							case 'Obadiah':
-							case 'Philemon':
-							case '2 John':
-							case '3 John':
-							case 'Jude':
-								return 1;
-							case 'Haggai':
-								return 2;
-							case 'Joel':
-							case 'Nahum':
-							case 'Habakkuk':
-							case 'Zephaniah':
-							case '2 Thessalonians':
-							case 'Titus':
-							case '2 Peter':
-								return 3;
-							case 'Ruth':
-							case 'Jonah':
-							case 'Malachi':
-							case 'Philippians':
-							case 'Colossians':
-							case '2 Timothy':
-								return 4;
-							case 'Lamentations':
-							case '1 Thessalonians':
-							case 'James':
-							case '1 Peter':
-							case '1 John':
-								return 5;
-							case 'Galatians':
-							case 'Ephesians':
-							case '1 Timothy':
-								return 6;
-							case 'Micah':
-								return 7;
-							case 'Song of Songs':
-								return 8;
-							case 'Amos':
-								return 9;
-							case 'Ezra':
-							case 'Esther':
-								return 10;
-							case 'Ecclesiastes':
-							case 'Daniel':
-								return 12;
-							case 'Nehemiah':
-							case '2 Corinthians':
-							case 'Hebrews':
-								return 13;
-							case 'Hosea':
-							case 'Zechariah':
-								return 14;
-							case 'Mark':
-							case 'Romans':
-							case '1 Corinthians':
-								return 16;
-							case 'Judges':
-							case 'John':
-								return 21;
-							case '1 Kings':
-							case 'Revelation':
-								return 22;
-							case 'Joshua':
-							case '2 Samuel':
-							case 'Luke':
-								return 24;
-							case '2 Kings':
-								return 25;
-							case 'Leviticus':
-								return 27;
-							case 'Matthew':
-							case 'Acts':
-								return 28;
-							case '1 Chronicles':
-								return 29;
-							case '1 Samuel':
-							case 'Proverbs':
-								return 31;
-							case 'Deuteronomy':
-								return 34;
-							case 'Numbers':
-							case '2 Chronicles':
-								return 36;
-							case 'Exodus':
-								return 40;
-							case 'Job':
-								return 42;
-							case 'Ezekiel':
-								return 48;
-							case 'Genesis':
-								return 50;
-							case 'Jeremiah':
-								return 52;
-							case 'Isaiah':
-								return 66;
-							case 'Psalms':
-								return 150;
-							default:
-								alert('Error in chapter validation switch statement.');
-							}
-						}
-					},
-					"verse" : {
-						required : true,
-						min : 1,
-						max : 176
-					}
-				},
-				messages : {
-					"chapter" : {
-						required : "Please enter a chapter number.",
-						min : "Chapter number must be >= 1",
-						max : "The book of " + $('#bookSelection').val() + " does not have that many chapters."
-					},
-					"verse" : {
-						required : "Please enter a verse number.",
-						min : "Verse number must be >= 1",
-						max : "Verse number must be <= 176"
-					}
-				}
-			});
+	$('#chapterSelection').on('change',function(){
+		if($('#bookSelection').val() == ''){
+			$('#verseSelection').val('');
+			$('#verseSelection').prop('disabled',true);
+		}else{
+			var b = encodeURIComponent($('#bookSelection').val());
+			var c = $('#chapterSelection').val();
+			var url = '/VerseScrambler/versesInChapter?b=' + b + '&c=' + c;
+			alert(url);
+			$.get(url, function(data, status){
+		        alert("Data: " + data + "\nStatus: " + status);
+		    }, 'json');
+		    $('#verseSelection').val('1');
+			$('#verseSelection').prop('disabled',false);
+		}
 
-		});
+	});
 
-	}(window.jQuery, window, document));
+});
+
+
+
+// 	(function($, window, document) {
+
+// 		$(function() {
+
+// 			$('#book').on('change',function(){
+// 					if($('#book').val() == 'noBookSelected'){
+// 						$('#chapter').prop('disabled',true);
+// 					}else{
+// 						$('#chapter').prop('disabled',false);
+// 					}
+
+// 				});
+
+
+			
+
+// 			$("#referenceForm").validate({
+// 				rules : {
+// 					"book" : {
+// 						required : true,
+// 						},
+// 					"chapter" : {
+// 						required : true,
+// 						min : 1,
+// 						max : function(element) {
+
+// 							switch ($('#bookSelection').val()) {
+// 							case 'Obadiah':
+// 							case 'Philemon':
+// 							case '2 John':
+// 							case '3 John':
+// 							case 'Jude':
+// 								return 1;
+// 							case 'Haggai':
+// 								return 2;
+// 							case 'Joel':
+// 							case 'Nahum':
+// 							case 'Habakkuk':
+// 							case 'Zephaniah':
+// 							case '2 Thessalonians':
+// 							case 'Titus':
+// 							case '2 Peter':
+// 								return 3;
+// 							case 'Ruth':
+// 							case 'Jonah':
+// 							case 'Malachi':
+// 							case 'Philippians':
+// 							case 'Colossians':
+// 							case '2 Timothy':
+// 								return 4;
+// 							case 'Lamentations':
+// 							case '1 Thessalonians':
+// 							case 'James':
+// 							case '1 Peter':
+// 							case '1 John':
+// 								return 5;
+// 							case 'Galatians':
+// 							case 'Ephesians':
+// 							case '1 Timothy':
+// 								return 6;
+// 							case 'Micah':
+// 								return 7;
+// 							case 'Song of Songs':
+// 								return 8;
+// 							case 'Amos':
+// 								return 9;
+// 							case 'Ezra':
+// 							case 'Esther':
+// 								return 10;
+// 							case 'Ecclesiastes':
+// 							case 'Daniel':
+// 								return 12;
+// 							case 'Nehemiah':
+// 							case '2 Corinthians':
+// 							case 'Hebrews':
+// 								return 13;
+// 							case 'Hosea':
+// 							case 'Zechariah':
+// 								return 14;
+// 							case 'Mark':
+// 							case 'Romans':
+// 							case '1 Corinthians':
+// 								return 16;
+// 							case 'Judges':
+// 							case 'John':
+// 								return 21;
+// 							case '1 Kings':
+// 							case 'Revelation':
+// 								return 22;
+// 							case 'Joshua':
+// 							case '2 Samuel':
+// 							case 'Luke':
+// 								return 24;
+// 							case '2 Kings':
+// 								return 25;
+// 							case 'Leviticus':
+// 								return 27;
+// 							case 'Matthew':
+// 							case 'Acts':
+// 								return 28;
+// 							case '1 Chronicles':
+// 								return 29;
+// 							case '1 Samuel':
+// 							case 'Proverbs':
+// 								return 31;
+// 							case 'Deuteronomy':
+// 								return 34;
+// 							case 'Numbers':
+// 							case '2 Chronicles':
+// 								return 36;
+// 							case 'Exodus':
+// 								return 40;
+// 							case 'Job':
+// 								return 42;
+// 							case 'Ezekiel':
+// 								return 48;
+// 							case 'Genesis':
+// 								return 50;
+// 							case 'Jeremiah':
+// 								return 52;
+// 							case 'Isaiah':
+// 								return 66;
+// 							case 'Psalms':
+// 								return 150;
+// 							default:
+// 								alert('Error in chapter validation switch statement.');
+// 							}
+// 						}
+// 					},
+// 					"verse" : {
+// 						required : true,
+// 						min : 1,
+// 						max : 176
+// 					}
+// 				},
+// 				messages : {
+// 					"chapter" : {
+// 						required : "Please enter a chapter number.",
+// 						min : "Chapter number must be >= 1",
+// 						max : function(){
+// 								var string = $('#bookSelection').val();
+// 								return "The book of " + string + " does not have that many chapters."
+// 							}
+// 					},
+// 					"verse" : {
+// 						required : "Please enter a verse number.",
+// 						min : "Verse number must be >= 1",
+// 						max : "Verse number must be <= 176"
+// 					}
+// 				}
+// 			});
+
+// 			$('#book').on('change,blur',function(){
+// 				$('#chapter').click();
+// 				$('#verse').click();
+// 			});
+
+// 			$('#verse').on('change,blur',function(){
+// 				$('#book').click();
+// 				$('#chapter').click();
+// 			});
+
+// 			$('#verse').on('change,blur',function(){
+// 				$('#verse').click();
+// 				$('#chapter').click();
+// 			});
+
+// 		});
+
+// 	}(window.jQuery, window, document));
 </script>
 <body>
 	<div class="container-fluid">
@@ -166,6 +242,7 @@
 					<div class="row">
 						<div class="col-xs-2 home-input">
 							<label for="bookSelection">Book:<form:select id="bookSelection" name="book" path="book" class="form-control">
+									<option value="noBookSelected">Select A Book</option>
 									<option value="Genesis">Genesis</option>
 									<option value="Exodus">Exodus</option>
 									<option value="Leviticus">Leviticus</option>
@@ -237,7 +314,7 @@
 						</div>
 						<div class="col-xs-2 home-input">
 							<label for="chapterSelection">Chapter:<form:input id="chapterSelection" name="chapter" path="chapter" type="text"
-									class="form-control" /></label>
+									class="form-control" disabled="true"/></label>
 						</div>
 						<div class="col-xs-2 home-input">
 							<label for="verseSelection">Verse:<form:input id="verseSelection" name="verse" path="verse" type="text" class="form-control" /></label>

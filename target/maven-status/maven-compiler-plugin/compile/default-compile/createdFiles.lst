@@ -1,4 +1,6 @@
-main\java\com\joshwithee\scrambler\service\VerseParser.class
 main\java\com\joshwithee\scrambler\model\HomeForm.class
-main\java\com\joshwithee\scrambler\controller\ScramblerController.class
+main\java\com\joshwithee\scrambler\service\VerseParser.class
 main\java\org\esv\bible\service\ESVService.class
+main\java\com\joshwithee\scrambler\model\VerseLimit.class
+main\java\com\joshwithee\scrambler\controller\ScramblerController.class
+main\java\com\joshwithee\scrambler\controller\AjaxController.class

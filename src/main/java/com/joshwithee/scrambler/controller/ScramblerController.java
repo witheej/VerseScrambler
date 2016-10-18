@@ -24,9 +24,9 @@ public class ScramblerController {
 
 	@Autowired
 	private VerseParser verseParser = new VerseParser();
-	
+
 	@RequestMapping(value = "/")
-	public String forwardRoot(){
+	public String forwardRoot() {
 		return "forward:/home";
 	}
 
