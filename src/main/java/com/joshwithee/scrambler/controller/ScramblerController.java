@@ -49,6 +49,22 @@ public class ScramblerController {
 		String book = submittedVerse.getBook();
 		int chapter = submittedVerse.getChapter();
 		int verse = submittedVerse.getVerse();
+		String mode = submittedVerse.getMode();
+		int groupSize = 1;
+		switch(mode){
+		case "easy":
+			groupSize = 3;
+			break;
+		case "normal":
+			groupSize = 2;
+			break;
+		case "hard":
+			groupSize = 1;
+			break;
+		default:
+			groupSize = 5;
+		}
+		
 
 		String verseText = "";
 		try {
@@ -64,10 +80,15 @@ public class ScramblerController {
 			System.out.println("Method getScrambler says: Valid reference.");
 		}
 
-		String[] parsedVerse = verseParser.arrayifySingleVerse(verseText);
-		String[] scrambledVerse = verseParser.scrambleItems(parsedVerse);
+		String[] parsedVerse = verseParser.arrayifySingleVerse(verseText, groupSize);
+		if (parsedVerse.length > 1) {
+			String[] scrambledVerse = verseParser.scrambleItems(parsedVerse);
+			request.setAttribute("scrambledVerse", scrambledVerse);
+		} else {
+			request.setAttribute("scrambledVerse", parsedVerse);
+		}
 		request.setAttribute("parsedVerse", parsedVerse);
-		request.setAttribute("scrambledVerse", scrambledVerse);
+		
 
 		return "scrambler";
 	}

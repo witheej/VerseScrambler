@@ -5,6 +5,7 @@ public class HomeForm {
 	private String book;
 	private int chapter;
 	private int verse;
+	private String mode;
 
 	public String getBook() {
 		return book;
@@ -29,4 +30,14 @@ public class HomeForm {
 	public void setVerse(int verse) {
 		this.verse = verse;
 	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+	
+	
 }

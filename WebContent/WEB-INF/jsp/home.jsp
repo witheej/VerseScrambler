@@ -186,6 +186,16 @@
 				<p>Enter a verse and click "Submit" to begin.</p>
 				<form:form id="referenceForm" commandName="submittedVerse" action="scrambler">
 					<div class="row">
+						<div class="col-xs-12">
+							<form:radiobutton path="mode" value="easy" />
+							Easy
+							<form:radiobutton path="mode" value="normal" />
+							Normal
+							<form:radiobutton path="mode" value="hard" />
+							Hard
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-xs-2 home-input">
 							<label for="bookSelection">Book:<form:select id="bookSelection" name="book" path="book" class="form-control">
 									<option value="noBookSelected">Select A Book</option>
