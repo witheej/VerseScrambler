@@ -50,21 +50,7 @@ public class ScramblerController {
 		int chapter = submittedVerse.getChapter();
 		int verse = submittedVerse.getVerse();
 		String mode = submittedVerse.getMode();
-		int groupSize = 1;
-		switch(mode){
-		case "easy":
-			groupSize = 3;
-			break;
-		case "normal":
-			groupSize = 2;
-			break;
-		case "hard":
-			groupSize = 1;
-			break;
-		default:
-			groupSize = 5;
-		}
-		
+		int groupSize = setDifficulty(mode);
 
 		String verseText = "";
 		try {
@@ -81,16 +67,38 @@ public class ScramblerController {
 		}
 
 		String[] parsedVerse = verseParser.arrayifySingleVerse(verseText, groupSize);
+		request.setAttribute("parsedVerse", parsedVerse);
+
 		if (parsedVerse.length > 1) {
 			String[] scrambledVerse = verseParser.scrambleItems(parsedVerse);
 			request.setAttribute("scrambledVerse", scrambledVerse);
 		} else {
 			request.setAttribute("scrambledVerse", parsedVerse);
 		}
-		request.setAttribute("parsedVerse", parsedVerse);
-		
 
 		return "scrambler";
+	}
+
+	private int setDifficulty(String mode) {
+		int result = 1;
+
+		if (mode != null) {
+			switch (mode) {
+			case "easy":
+				result = 3;
+				break;
+			case "normal":
+				result = 2;
+				break;
+			case "hard":
+				result = 1;
+				break;
+			default:
+				result = 5;
+			}
+		}
+
+		return result;
 	}
 
 }

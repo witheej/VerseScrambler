@@ -20,31 +20,45 @@
 
 		$(function() {
 
-			var wordBankList = $("#wordBank");
-			var answerSpaceList = $("#answerSpace");
-			var clear = $("#clearAll");
-			var submitButton = $("#submitAnswer");
+			var $wordBank = $("#wordBank");
+			var $answerSpace = $("#answerSpace");
+			var $clearAll = $("#clearAll");
+			var $submitAnswer = $("#submitAnswer");
+			var $response = $("#response");
+			var $solution = $("#solution");
 
 			//Prevent #wordBank and #answerSpace from expanding/shrinking when words are moved around
-			answerSpaceList.height(wordBankList.height());
-			wordBankList.height(wordBankList.height());
+			$answerSpace.height($wordBank.height());
+			$wordBank.height($wordBank.height());
 
 			//Click words in #wordBank to append them inside #answerSpace
-			wordBankList.on("click", "button", function() {
-				$(this).animateAppendTo('#answerSpace', 100);
+			$wordBank.on("click", "button", function() {
+				$(this).animateAppendTo("#answerSpace", 100);
 			});
 
 			//Click words in #answerSpace to send them back to #wordBank
-			answerSpaceList.on("click", "button", function() {
+			$answerSpace.on("click", "button", function() {
 				$(this).animateAppendTo('#wordBank', 100);
 			});
 
 			//"Clear All" button sends all words in #answerSpace back into #wordBank
-			clear.on("click", function() {
+			$clearAll.on("click", function() {
 				$("#answerSpace button").click();
 			});
 
-			
+			//Checks answer and displays result
+			$submitAnswer.on("click", function() {
+				var ans = "";
+				$("#answerSpace button").each(function() {
+					ans += $(this).text() + " ";
+				});
+				var sol = $solution.text();
+				if (ans.trim() == sol.trim()) {
+					$response.text("Correct!");
+				} else {
+					$response.text("Wrong.");
+				}
+			});
 
 		});
 
@@ -52,7 +66,7 @@
 		$.fn.animateAppendTo = function(sel, speed) {
 			var $this = this, newEle = $this.clone(true).appendTo(sel), newPos = newEle.position();
 			newEle.hide();
-			$this.css('position', 'absolute').animate(newPos, speed, function() {
+			$this.css("position", "absolute").animate(newPos, speed, function() {
 				newEle.show();
 				$this.remove();
 			});
@@ -79,14 +93,12 @@
 			<div id="answerSpace" class="well"></div>
 			<div>
 				<button id="submitAnswer"
-					onclick="var ans = '';
-					$('#answerSpace button').each(function(){ans += $(this).text() + ' '}); var sol = $('#solution').text(); if(ans.trim()==sol.trim()){$('#response').text('Correct!')}else{$('#response').text('Wrong.')};"
 					class="btn btn-success">Submit!</button>
 				<button id="clearAll" class="btn btn-danger">Clear All</button>
 				<span id="response"></span>
 			</div>
 		</div>
 	</div>
-	<span id="solution"><c:forEach items="${parsedVerse}" var="j">${j} </c:forEach></span>
+	<span id="solution"><c:forEach items="${parsedVerse}" var="j">${j}</c:forEach></span>
 </body>
 </html>

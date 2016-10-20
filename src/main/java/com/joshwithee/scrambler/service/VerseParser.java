@@ -1,6 +1,7 @@
 package main.java.com.joshwithee.scrambler.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class VerseParser {
 
+	//The ESV API returns verses with verse numbers in square brackets and "ESV" at the end. 
+	//This method removes those. 
 	public String cleanVerse(String verse) {
-		return verse.replaceAll("\\[\\d+(:\\d+)?\\]", "").replaceAll("[[:space:]]*\\(ESV\\)", "").replaceAll("^\\s+", "");
+		return verse.replaceAll("\\[\\d+(:\\d+)?\\]", "").replaceAll("[[:space:]]*\\(ESV\\)", "").trim();
 	}
 
 	public String[] arrayifySingleVerse(String verse) {
@@ -19,34 +22,7 @@ public class VerseParser {
 		return items;
 	}
 
-	public String[] arrayifySingleVerse(String verse, String mode) {
-
-		String result = cleanVerse(verse);
-		String[] parts = result.split(" ");
-		System.out.println("Length of string array: " + parts.length);
-		for (int i = 0; i < parts.length; i = i + 1) {
-			System.out.println("==" + parts[i] + "==");
-			;
-		}
-		if ("normal".equals(mode)) {
-
-			ArrayList<String> listItems = new ArrayList<String>();
-			for (int i = 1; i < parts.length; i = i + 2) {
-				listItems.add(parts[i - 1] + " " + parts[i]);
-			}
-			if (parts.length % 2 > 0) {
-				listItems.add(parts[parts.length - 1]);
-			}
-			for (int i = 0; i < listItems.size(); i++) {
-				System.out.println("---" + listItems.get(i) + "---");
-			}
-			String[] items = listItems.toArray(new String[listItems.size()]);
-			return items;
-		} else {
-			return parts;
-		}
-	}
-
+	//This method arrayifies a verse, putting n words in each string
 	public String[] arrayifySingleVerse(String verse, int n) {
 
 		String result = cleanVerse(verse);
@@ -54,7 +30,7 @@ public class VerseParser {
 		System.out.println("Length of string array: " + parts.length);
 		for (int i = 0; i < parts.length; i = i + 1) {
 			System.out.println("==" + parts[i] + "==");
-			;
+			
 		}
 
 		ArrayList<String> listItems = new ArrayList<String>();
@@ -73,15 +49,17 @@ public class VerseParser {
 		int z = parts.length % n;
 		if (z > 0) {
 			String temp2 = "";
-			for(int t=z; t > 0; t--){
+			for (int t = z; t > 0; t--) {
 				temp2 += parts[parts.length - t];
-				if(t > 1){
+				if (t > 1) {
 					temp2 += " ";
 				}
 			}
-			
+
 			listItems.add(temp2);
 		}
+		trimStringsInArrayList(listItems);
+		removeBlanksFromArrayList(listItems);
 		for (int i = 0; i < listItems.size(); i++) {
 			System.out.println("---" + listItems.get(i) + "---");
 		}
@@ -90,6 +68,7 @@ public class VerseParser {
 
 	}
 
+	//Scrambles an array of Strings
 	public String[] scrambleItems(String[] items) {
 		String[] result = new String[items.length];
 		Random rnd = ThreadLocalRandom.current();
@@ -105,6 +84,21 @@ public class VerseParser {
 			result[j] = temp;
 		}
 		return result;
+	}
+
+	public static void removeBlanksFromArrayList(ArrayList<String> a) {
+		Iterator<String> iter = a.iterator();
+		while (iter.hasNext()) {
+			if (iter.next().matches("[[:space:]]*|\\s+")) {
+				iter.remove();
+			}
+		}
+	}
+	
+	public static void trimStringsInArrayList(ArrayList<String> a) {
+		for (int i = 0; i < a.size(); i++) {
+		    a.set(i, a.get(i).trim());
+		}
 	}
 
 }
