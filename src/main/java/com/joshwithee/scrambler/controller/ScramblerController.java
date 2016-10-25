@@ -67,6 +67,9 @@ public class ScramblerController {
 		}
 
 		String[] parsedVerse = verseParser.arrayifySingleVerse(verseText, groupSize);
+		String answerVerse = verseParser.cleanVerse(verseText);
+		
+		request.setAttribute("answerVerse", answerVerse);
 		request.setAttribute("parsedVerse", parsedVerse);
 
 		if (parsedVerse.length > 1) {
@@ -84,6 +87,9 @@ public class ScramblerController {
 
 		if (mode != null) {
 			switch (mode) {
+			case "veryeasy":
+				result = 5;
+				break;
 			case "easy":
 				result = 3;
 				break;

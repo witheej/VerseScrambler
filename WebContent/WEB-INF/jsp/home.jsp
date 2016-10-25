@@ -74,6 +74,7 @@
 					}
 					$chapterSelection.val('1');
 					$chapterSelection.prop('disabled', false);
+					$chapterSelection.change();
 				}
 			}
 
@@ -195,7 +196,9 @@
 				<form:form id="referenceForm" commandName="submittedVerse" action="scrambler">
 					<div class="row">
 						<div class="col-xs-12">
-							<form:radiobutton path="mode" value="easy" />
+							<form:radiobutton path="mode" value="veryeasy"/>
+							Very Easy
+							<form:radiobutton path="mode" value="easy" checked="checked"/>
 							Easy
 							<form:radiobutton path="mode" value="normal" />
 							Normal

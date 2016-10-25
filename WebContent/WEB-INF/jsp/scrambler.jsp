@@ -53,6 +53,7 @@
 					ans += $(this).text() + " ";
 				});
 				var sol = $solution.text();
+				
 				if (ans.trim() == sol.trim()) {
 					$response.text("Correct!");
 				} else {
@@ -99,6 +100,6 @@
 			</div>
 		</div>
 	</div>
-	<span id="solution"><c:forEach items="${parsedVerse}" var="j">${j}</c:forEach></span>
+	<span id="solution"><c:out value="${answerVerse}"/></span>
 </body>
 </html>
