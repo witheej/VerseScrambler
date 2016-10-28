@@ -2,13 +2,13 @@ package main.java.com.joshwithee.scrambler.model;
 
 public class VerseLimit {
 	
-	String limit;
+	int limit;
 
-	public String getLimit() {
+	public int getLimit() {
 		return limit;
 	}
 
-	public void setLimit(String limit) {
+	public void setLimit(int limit) {
 		this.limit = limit;
 	}
 

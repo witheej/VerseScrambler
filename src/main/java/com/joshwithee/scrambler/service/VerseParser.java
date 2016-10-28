@@ -13,7 +13,7 @@ public class VerseParser {
 	//The ESV API returns verses with verse numbers in square brackets and "ESV" at the end. 
 	//This method removes those. 
 	public String cleanVerse(String verse) {
-		return verse.replaceAll("\\[\\d+(:\\d+)?\\]", "").replaceAll("[[:space:]]*\\(ESV\\)", "").trim();
+		return verse.replaceAll("\\[\\d+(:\\d+)?\\]", "").replaceAll("\\s*\\(ESV\\)", "").replaceAll("\\s+", " ").trim();
 	}
 
 	public String[] arrayifySingleVerse(String verse) {

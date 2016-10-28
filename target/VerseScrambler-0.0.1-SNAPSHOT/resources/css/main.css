@@ -25,16 +25,26 @@ body {
 
 .jumbotron {
 	margin: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .jumbotron-answer {
 	padding: 20px;
 }
 
+#wordBank, #answerSpace {
+	background-image: url(../img/old_paper_background.jpg);
+	border: solid #000 2px;
+}
+
 .scrambleWord {
 	margin-right: 1px;
 	margin-left: 1px;
 	margin-bottom: 4px;
+	background-image: url(../img/old_paper.jpg);
+	font-weight: bold;
+	color: #000;
 }
 
 #submit {
