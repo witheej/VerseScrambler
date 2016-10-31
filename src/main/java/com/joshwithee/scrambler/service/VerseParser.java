@@ -25,6 +25,7 @@ public class VerseParser {
 	//This method arrayifies a verse, putting n words in each string
 	public String[] arrayifySingleVerse(String verse, int n) {
 
+		System.out.println(verse);
 		String result = cleanVerse(verse);
 		String[] parts = result.split(" ");
 		System.out.println("Length of string array: " + parts.length);
@@ -58,8 +59,11 @@ public class VerseParser {
 
 			listItems.add(temp2);
 		}
+		System.out.println(listItems.toString());
 		trimStringsInArrayList(listItems);
+		System.out.println(listItems.toString());
 		removeBlanksFromArrayList(listItems);
+		System.out.println(listItems.toString());
 		for (int i = 0; i < listItems.size(); i++) {
 			System.out.println("---" + listItems.get(i) + "---");
 		}
@@ -86,15 +90,17 @@ public class VerseParser {
 		return result;
 	}
 
+	//This is almost certainly no longer needed
 	public static void removeBlanksFromArrayList(ArrayList<String> a) {
 		Iterator<String> iter = a.iterator();
 		while (iter.hasNext()) {
-			if (iter.next().matches("[[:space:]]*|\\s+")) {
+			if (iter.next().matches("\\s*")) {
 				iter.remove();
 			}
 		}
 	}
 	
+	//This is almost certainly no longer needed
 	public static void trimStringsInArrayList(ArrayList<String> a) {
 		for (int i = 0; i < a.size(); i++) {
 		    a.set(i, a.get(i).trim());
